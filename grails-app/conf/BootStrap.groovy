@@ -11,9 +11,10 @@ class BootStrap {
 
             def password = springSecurityService.encodePassword('password')
 
-            [jeff: 'jeff Brown', graeme: 'Graeme Rocher', burt: 'Burt Reynolds']
-                def user = new Person(username: userName, realName: realName)
+            [jeff: 'jeff Brown', graeme: 'Graeme Rocher', burt: 'Burt Binglesteen', peter: 'Peter Ledbrook'].each { userName, realName ->
+                def user = new Person(username: userName, realName: realName, password: password, enabled: true).save()
                 PersonAuthority.create user, userRole, true
+            }
         }
     }
     def destroy = {

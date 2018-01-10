@@ -117,20 +117,20 @@ log4j.main = {
 }
 
 
-// Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.grails.twitter.auth.Person'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.grails.twitter.auth.PersonAuthority'
-grails.plugin.springsecurity.authority.className = 'org.grails.twitter.auth.Authority'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/assets/**':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
-]
+//// Added by the Spring Security Core plugin:
+//grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.grails.twitter.auth.Person'
+//grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.grails.twitter.auth.PersonAuthority'
+//grails.plugin.springsecurity.authority.className = 'org.grails.twitter.auth.Authority'
+//grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+//	'/':                              ['permitAll'],
+//	'/index':                         ['permitAll'],
+//	'/index.gsp':                     ['permitAll'],
+//	'/assets/**':                     ['permitAll'],
+//	'/**/js/**':                      ['permitAll'],
+//	'/**/css/**':                     ['permitAll'],
+//	'/**/images/**':                  ['permitAll'],
+//	'/**/favicon.ico':                ['permitAll']
+//]
 
 
 
@@ -150,8 +150,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity
-grails.plugins.springsecurity.interceptUrlMap = [
+grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.SecurityConfigType.InterceptUrlMap
+grails.plugin.springsecurity.interceptUrlMap = [
         '/login/**':                ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/logout/**':               ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
