@@ -140,6 +140,7 @@ log4j.main = {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.grails.twitter.auth.Person'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.grails.twitter.auth.PersonAuthority'
 grails.plugin.springsecurity.authority.className = 'org.grails.twitter.auth.Authority'
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
