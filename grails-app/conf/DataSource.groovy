@@ -1,5 +1,6 @@
 dataSource {
     pooled = true
+    jmxExport = true
     driverClassName = "com.mysql.jdbc.Driver"
     dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
     username = "paddym"
@@ -15,7 +16,7 @@ environments {
     development {
         dataSource {
             dbCreate = "create" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/person?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/person?useUnicode=yes&characterEncoding=UTF-8&useSSL=false"
             username = "root"
             password = "slieverue2110"
         }
