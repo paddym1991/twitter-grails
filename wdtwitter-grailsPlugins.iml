@@ -205,6 +205,7 @@
           <root url="jar://C:/Grails/grails-2.4.4/lib/org.apache.ant/ant-trax/jars/ant-trax-1.7.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
