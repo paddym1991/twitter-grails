@@ -88,10 +88,12 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+       // grails.serverURL = "http://localhost:8080/${appName}"
     }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
+        // TODO: grails.serverURL = "http://localhost:8080/wdtwitter"
     }
 }
 
@@ -152,10 +154,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
-// Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.SecurityConfigType.InterceptUrlMap
-grails.plugin.springsecurity.interceptUrlMap = [
-        '/login/**':                ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/logout/**':               ['IS_AUTHENTICATED_ANONYMOUSLY']
-]
+//// Added by the Spring Security Core plugin:
+//grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.SecurityConfigType.InterceptUrlMap
+//grails.plugin.springsecurity.interceptUrlMap = [
+//        '/login/**':                ['IS_AUTHENTICATED_ANONYMOUSLY'],
+//        '/logout/**':               ['IS_AUTHENTICATED_ANONYMOUSLY']
+//]
 
