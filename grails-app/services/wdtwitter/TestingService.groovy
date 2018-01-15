@@ -8,7 +8,7 @@ class TestingService {
 
     def testDBConnection() {
         def retData = Person.createCriteria().get() {
-            eq("username", "jeff")
+            eq("username", "peter")
             projections {
                 property('realName')
             }
@@ -19,6 +19,16 @@ class TestingService {
     def testLoginConnection() {
         def retData = Person.createCriteria().get() {
             eq("username", "jeff")
+            projections {
+                property('id')
+            }
+        }
+        retData
+    }
+
+    def peterIdConnection() {
+        def retData = Person.createCriteria().get() {
+            eq("username", "peter")
             projections {
                 property('id')
             }

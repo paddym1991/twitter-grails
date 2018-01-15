@@ -6,6 +6,7 @@ import wdtwitter.TestingService
 class TestingController {
 
     TestingService testingService
+
     @Secured('permitAll')
     def index() {
         render testingService.testDBConnection()
@@ -14,5 +15,10 @@ class TestingController {
     @Secured('IS_AUTHENTICATED_FULLY')
     def loginTest() {
         render testingService.testLoginConnection()
+    }
+
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def peterIdTest() {
+        render testingService.peterIdConnection()
     }
 }
