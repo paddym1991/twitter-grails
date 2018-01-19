@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 
-<p>Status page</p>
     <head>
         <meta name="layout" content="main"/>
         <title>What are you doing?</title>
@@ -16,13 +15,62 @@
 
     <body>
 
-        <h1>What are you doing?</h1>
-        <div class="updateStatusForm">
-            <g:formRemote url="[action: 'updateStatus']" update="messages" name="updateStatusForm">
-                <g:textArea name="message" value=""/><br/>
-                <g:submitButton name="Update Status"/>
-            </g:formRemote>
-        </div>
+
+        <h1>Welcome 'users name'</h1>
+        <h2>What are you doing?</h2>
+        <p>message: <input type="text" id="message"></p><br/>
+        <button id="submit">Update Status</button>
+    <div>
+        <h2>Timeline</h2>
+        <p>'message'</p>
+        <p>'time/date</p>
+        <ul id="timeline"></ul>
+    </div>
+
+    <div>
+        <h3>Set new words</h3>
+        <p> New Words: <input type="text" id="newWords"></p>
+        <button id="setWords">Update Words</button>
+        <h3>newWords</h3>
+        <ul id="listWords"></ul>
+    </div>
+
+    <content tag="end">
+
+        <asset:javascript src="assets/javascripts/application.js"/>
+        <asset:javascript src="assets/javascripts/status.js"/>
+    </content>
+    %{--<h1>What are you doing?</h1>--}%
+    %{--<p>message: <input type="text" id="message"></p><br/>--}%
+    %{--<button id="submit">Update Status</button>--}%
+
+
+        %{--<h1>What are you doing?</h1>--}%
+        %{--<div class="updateStatusForm">--}%
+            %{--<g:form url="[action: 'updateStatus']" update="messages" name="updateStatusForm">--}%
+                %{--<g:textArea name="message" value=""/><br/><br/>--}%
+                %{--<g:submitButton name="Update Status"/>--}%
+            %{--</g:form>--}%
+        %{--</div>--}%
+    %{--<div id="messages">--}%
+        %{--<g:render template="messages" collection="${messages}" var="message"/>--}%
+    %{--</div>--}%
+
+
 
     </body>
+
+
 </html>
+
+%{--<script>--}%
+    %{--$(function() {--}%
+
+
+        %{--$('#updateStatus').on('click', function() {--}%
+            %{--$('#updateStatus').toggle()--}%
+        %{--})--}%
+
+
+    %{--})--}%
+%{--</script>--}%
