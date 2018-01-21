@@ -15,14 +15,19 @@
 
     <body>
 
+    <sec:ifLoggedIn>
+        <h1>Welcome <sec:username/><p id="user"></p></h1>
+    </sec:ifLoggedIn>
 
-        <h1>Welcome 'users name'</h1>
+    <div>
+        <button id="currentUser">Show user</button>
+    </div>
+
         <h2>What are you doing?</h2>
         <p>message: <input type="text" id="message"></p><br/>
         <button id="submit">Update Status</button>
     <div>
         <h2>Timeline</h2>
-        <p>'message'</p>
         <p>'time/date</p>
         <ul id="timeline"></ul>
     </div>
@@ -34,6 +39,7 @@
         <h3>newWords</h3>
         <ul id="listWords"></ul>
     </div>
+
 
     <content tag="end">
 
