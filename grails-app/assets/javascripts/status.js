@@ -23,6 +23,10 @@ $(function() {
 
 
 })
+
+/**
+ * function called when index page is requested. This requests the logged in user JSON object and returns the username
+ */
 function getUser() {
     $.ajax({
         url: 'http://localhost:8080/wdtwitter/status/loggedInUser',
