@@ -1,13 +1,18 @@
 package wdtwitter
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 import org.grails.twitter.auth.Person
 import org.springframework.security.access.annotation.Secured
+import org.springframework.security.core.userdetails.User
 
 @Transactional
 class StatusService {
 
+    def springSecurityService
+
     def index() {
+
 //        def messages = currentUserTimeline()
 //        return [messages:messages]
 
@@ -33,4 +38,23 @@ class StatusService {
     def updateWords(newWordsObject) {
         newWordsObject
     }
+
+    /*
+     * Get the logged In User
+     */
+    def loggedInUser() {
+//       def userObj = springSecurityService.currentUser
+//       def userMap = [:]
+//       userMap.username = userObj.username
+//       userMap.realName = userObj.realName
+//       return userMap as JSON
+        springSecurityService.currentUser as JSON
+    }
+
+//    /*
+//    * Get the name of the currently logged-in user
+//    */
+//    String loggedInUserName() {
+//        springSecurityService.currentUser.username
+//    }
 }

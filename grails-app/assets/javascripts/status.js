@@ -19,8 +19,21 @@ var $message = $('message')
 $(function() {
 
     console.log($("#submit").html())
+    getUser()
+
 
 })
+function getUser() {
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/loggedInUser',
+        type: 'GET', //HTML method "post" or "get"
+        //below is a seperate function from above
+        success: function(returnedData) {
+           $('#currentUserName').html(returnedData.username)
+
+        }
+    })
+}
 
 
 
@@ -54,6 +67,20 @@ $(document).on('click', "#setWords", function()  {
         url: 'http://localhost:8080/wdtwitter/status/updateWords',
         type: 'POST',
         data: {newWordsObject:words},
+        success: function(returnedData) {
+            console.log('newWords: ' + returnedData)
+            $('#listWords').append('<p>' + returnedData + '</p>')
+        }
+    })
+})
+
+$(document).on('mouseover', "#currentUser", function()  {
+
+    var loggedInUser = loggedInUser()
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/updateWords',
+        type: 'GET',
+        data: {User:loggedInUser},
         success: function(returnedData) {
             console.log('newWords: ' + returnedData)
             $('#listWords').append('<p>' + returnedData + '</p>')

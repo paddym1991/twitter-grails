@@ -15,9 +15,13 @@
 
     <body>
 
-    <sec:ifLoggedIn>
-        <h1>Welcome <sec:username/><p id="user"></p></h1>
-    </sec:ifLoggedIn>
+
+    %{--<sec:ifLoggedIn>--}%
+        %{--<h1>Welcome <sec:username/><p id="user"></p></h1>--}%
+    %{--</sec:ifLoggedIn>--}%
+
+    <h1>Welcome <span id="currentUserName"></span></h1>
+
 
     <div>
         <button id="currentUser">Show user</button>

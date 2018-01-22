@@ -1,5 +1,6 @@
 package org.grails.twitter
 
+import grails.converters.JSON
 import org.grails.twitter.auth.Person
 import org.springframework.security.access.annotation.Secured
 import wdtwitter.StatusService
@@ -9,9 +10,14 @@ import wdtwitter.StatusService
 class StatusController {
 
     StatusService statusService
+    def wdtwitterSecurityService
+    def springSecurityService
+
 
     @Secured('IS_AUTHENTICATED_FULLY')
     def index() {
+
+        //loggedInUser()
         render (view:'index.gsp')
     }
 
@@ -26,7 +32,15 @@ class StatusController {
         render statusService.updateWords(params.newWordsObject)
     }
 
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def loggedInUser() {
+        render(statusService.loggedInUser())
+    }
 
+//    @Secured('IS_AUTHENTICATED_FULLY')
+//    def loggedInUserName() {
+//        render(statusService.loggedInUserName())
+//    }
 
 
 
