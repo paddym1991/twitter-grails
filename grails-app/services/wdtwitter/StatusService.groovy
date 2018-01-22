@@ -48,13 +48,20 @@ class StatusService {
 //       userMap.username = userObj.username
 //       userMap.realName = userObj.realName
 //       return userMap as JSON
-        springSecurityService.currentUser as JSON
+        springSecurityService.currentUser
     }
 
 //    /*
 //    * Get the name of the currently logged-in user
 //    */
-//    String loggedInUserName() {
-//        springSecurityService.currentUser.username
+//     def loggedInUserName() {
+//        springSecurityService.currentUser.username as JSON
 //    }
+
+
+    def setUsername(username) {
+
+        loggedInUser().username = username
+    }
+
 }

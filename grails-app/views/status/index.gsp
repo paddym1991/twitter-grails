@@ -22,6 +22,8 @@
 
     <h1>Welcome <span id="currentUserName"></span></h1>
 
+    <p>Update Username: <input type="text" id="newUsername"></p><br/>
+    <button id="update">Update Username</button>
 
     <div>
         <button id="currentUser">Show user</button>
@@ -32,7 +34,7 @@
         <button id="submit">Update Status</button>
     <div>
         <h2>Timeline</h2>
-        <p>'time/date</p>
+        <p>time/date</p>
         <ul id="timeline"></ul>
     </div>
 

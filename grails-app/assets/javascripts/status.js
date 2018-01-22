@@ -87,3 +87,16 @@ $(document).on('mouseover', "#currentUser", function()  {
         }
     })
 })
+
+$(document).on('click', "#update", function()  {
+
+    var name = $('#newUsername').val()
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/updateUsername',
+        type: 'POST',
+        data: {username:name},
+        success: function(returnedData) {
+            console.log(returnedData)
+        }
+    })
+})
