@@ -1,5 +1,7 @@
 package org.grails.twitter.auth
 
+import org.springframework.security.core.userdetails.User
+
 class Person {
 
 	transient springSecurityService
@@ -7,6 +9,7 @@ class Person {
 	String realName
 	String username
 	String password
+	String phone
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -22,6 +25,7 @@ class Person {
 	static mapping = {
 		password column: '`password`'
 	}
+
 
 	Set<Authority> getAuthorities() {
 		PersonAuthority.findAllByPerson(this).collect { it.authority }
