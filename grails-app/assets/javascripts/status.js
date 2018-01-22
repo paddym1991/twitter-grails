@@ -36,8 +36,10 @@ function getUser() {
 }
 
 
-
-
+/**
+ * JQuery function for adding new message when button is clicked
+ * AJAX request function for adding a new message to timeline
+ */
 //$("#submit").on('click', function()  {                    //this on click will not work. JS is being loaded before the id from gsp is loaded
 $(document).on('click', "#submit", function()  {
     console.log('gobbledigook')
@@ -59,7 +61,10 @@ $(document).on('click', "#submit", function()  {
     })
 })
 
-
+/**
+ * JQuery function for adding new words message when button is clicked
+ * AJAX request function for adding a new words message
+ */
 $(document).on('click', "#setWords", function()  {
 
     var words = $('#newWords').val()
@@ -88,6 +93,9 @@ $(document).on('mouseover', "#currentUser", function()  {
     })
 })
 
+/**
+ * AJAX function to update the logged in user's username
+ */
 $(document).on('click', "#update", function()  {
 
     var name = $('#newUsername').val()

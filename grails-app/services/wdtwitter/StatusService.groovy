@@ -58,7 +58,11 @@ class StatusService {
 //        springSecurityService.currentUser.username as JSON
 //    }
 
-
+/**
+ * logic for updating username for logged in user
+ * @param username
+ * @return
+ */
     def setUsername(username) {
 
         loggedInUser().username = username
