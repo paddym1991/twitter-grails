@@ -73,27 +73,35 @@ class StatusService {
         loggedInUser().username = username
     }
 
+    /**
+     * Get all tweet messages from the db
+     */
     def getAllTweets() {
 
+        //create a list that the extracted data from db will be put in to
         def messages = Status.createCriteria().list() {
             projections {
+                //return back any message in db to the list
                 property('message')
             }
         }
 
-        Status.findAll().message
+        //Status.findAll().message
        // return 'hello'
     }
 
     /**
-     * Return logged in user's tweets from db
+     * Return logged in user's tweets from db using the author (the logged in user) as a parameter
      */
     def getUserTweets() {
 
         def user = loggedInUser()
+        //create a list that the extracted data from db will be put in to
         def messages = Status.createCriteria().list() {
+            //set the search field for messages as the author (logged in user)
             eq('author', user)
             projections {
+                //return back any message, with user as the author, to the list
                 property('message')
             }
         }

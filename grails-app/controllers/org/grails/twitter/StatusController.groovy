@@ -51,11 +51,19 @@ class StatusController {
         render(statusService.setUsername(params.username))
     }
 
+    /**
+     * calling method to get all messages/tweets
+     * @return JSON object of all tweets
+     */
     @Secured('IS_AUTHENTICATED_FULLY')
     def allTweetsTimeline() {
         render(statusService.getAllTweets() as JSON)
     }
 
+    /**
+     * #calling method to get all logged in user's tweets
+     * @return JSON object of all logged in user's tweets
+     */
     @Secured('IS_AUTHENTICATED_FULLY')
     def userTimeline() {
         render(statusService.getUserTweets() as JSON)

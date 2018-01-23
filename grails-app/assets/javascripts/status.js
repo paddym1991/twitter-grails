@@ -44,7 +44,7 @@ function getUser() {
  * Request to return all tweets/messages
  */
 function getTimeline() {
-
+    // ajax request to get all messages
     $.ajax({
         url: 'http://localhost:8080/wdtwitter/status/allTweetsTimeline',
         type: 'GET',
@@ -62,11 +62,12 @@ function getTimeline() {
  * request to return logged in users messages
  */
 function getUserTimeline() {
+    // ajax request to get all logged in user's messages
     $.ajax({
         url: 'http://localhost:8080/wdtwitter/status/userTimeline',
         type: 'GET',
         success: function(returnedData) {
-            //iterate through the returned data (i.e. the messages as a JSON object)
+            //iterate through the returned data (i.e. the user's messages as a JSON object)
             $.each(returnedData, function(index, value) {
                 //append each message onto the userTimeline list
                 $('#userTimeline').append('<p>' + value + '</p>')
