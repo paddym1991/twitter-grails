@@ -20,6 +20,8 @@ $(function() {
 
     console.log($("#submit").html())
     getUser()
+    getTimeline()
+    getUserTimeline()
 
 
 })
@@ -34,10 +36,45 @@ function getUser() {
         //below is a seperate function from above
         success: function(returnedData) {
            $('#currentUserName').html(returnedData.username)
-
         }
     })
 }
+
+/**
+ * Request to return all tweets/messages
+ */
+function getTimeline() {
+
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/allTweetsTimeline',
+        type: 'GET',
+        success: function(returnedData) {
+            //iterate through the returned data (i.e. the messages as a JSON object)
+            $.each(returnedData, function(index, value) {
+                //append each message onto the allTweetsTimeline list
+                $('#allTweetsTimeline').append('<p>' + value + '</p>')
+            })
+        }
+    })
+}
+
+/**
+ * request to return logged in users messages
+ */
+function getUserTimeline() {
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/userTimeline',
+        type: 'GET',
+        success: function(returnedData) {
+            //iterate through the returned data (i.e. the messages as a JSON object)
+            $.each(returnedData, function(index, value) {
+                //append each message onto the userTimeline list
+                $('#userTimeline').append('<p>' + value + '</p>')
+            })
+        }
+    })
+}
+
 
 
 /**
@@ -66,38 +103,6 @@ $(document).on('click', "#submit", function()  {
 })
 
 /**
- * JQuery function for adding new words message when button is clicked
- * AJAX request function for adding a new words message
- */
-$(document).on('click', "#setWords", function()  {
-
-    var words = $('#newWords').val()
-    $.ajax({
-        url: 'http://localhost:8080/wdtwitter/status/updateWords',
-        type: 'POST',
-        data: {newWordsObject:words},
-        success: function(returnedData) {
-            console.log('newWords: ' + returnedData)
-            $('#listWords').append('<p>' + returnedData + '</p>')
-        }
-    })
-})
-
-$(document).on('mouseover', "#currentUser", function()  {
-
-    var loggedInUser = loggedInUser()
-    $.ajax({
-        url: 'http://localhost:8080/wdtwitter/status/updateWords',
-        type: 'GET',
-        data: {User:loggedInUser},
-        success: function(returnedData) {
-            console.log('newWords: ' + returnedData)
-            $('#listWords').append('<p>' + returnedData + '</p>')
-        }
-    })
-})
-
-/**
  * AJAX function to update the logged in user's username
  */
 $(document).on('click', "#update", function()  {
@@ -112,3 +117,36 @@ $(document).on('click', "#update", function()  {
         }
     })
 })
+
+// /**
+//  * JQuery function for adding new words message when button is clicked
+//  * AJAX request function for adding a new words message
+//  */
+// $(document).on('click', "#setWords", function()  {
+//
+//     var words = $('#newWords').val()
+//     $.ajax({
+//         url: 'http://localhost:8080/wdtwitter/status/updateWords',
+//         type: 'POST',
+//         data: {newWordsObject:words},
+//         success: function(returnedData) {
+//             console.log('newWords: ' + returnedData)
+//             $('#listWords').append('<p>' + returnedData + '</p>')
+//         }
+//     })
+// })
+
+// $(document).on('mouseover', "#currentUser", function()  {
+//
+//     var loggedInUser = loggedInUser()
+//     $.ajax({
+//         url: 'http://localhost:8080/wdtwitter/status/updateWords',
+//         type: 'GET',
+//         data: {User:loggedInUser},
+//         success: function(returnedData) {
+//             console.log('newWords: ' + returnedData)
+//             $('#listWords').append('<p>' + returnedData + '</p>')
+//         }
+//     })
+// })
+

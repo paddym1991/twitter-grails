@@ -22,29 +22,42 @@
 
     <h1>Welcome <span id="currentUserName"></span></h1>
 
-    <p>Update Username: <input type="text" id="newUsername"></p><br/>
-    <button id="update">Update Username</button>
+    <p>Update Username: <input type="text" id="newUsername"></p>
+    <button id="update">Update Username</button><br/><br/>
 
-    <div>
-        <button id="currentUser">Show user</button>
-    </div>
+    %{--<div>--}%
+        %{--<button id="currentUser">Show user</button>--}%
+    %{--</div>--}%
 
         <h2>What are you doing?</h2>
-        <p>message: <input type="text" id="message"></p><br/>
-        <button id="submit">Update Status</button>
+        <p>message: <input type="text" id="message"></p>
+        <button id="submit">Update Status</button><br/><br/>
     <div>
         <h2>Timeline</h2>
-        <p>time/date</p>
         <ul id="timeline"></ul>
     </div>
 
+    <br/><br/><br/>
+
     <div>
-        <h3>Set new words</h3>
-        <p> New Words: <input type="text" id="newWords"></p>
-        <button id="setWords">Update Words</button>
-        <h3>newWords</h3>
-        <ul id="listWords"></ul>
+        <h2>All users status Timeline</h2>
+        <ul id="allTweetsTimeline"></ul>
     </div>
+
+    <br/><br/><br/>
+
+    <div>
+        <h2>Users Timeline</h2>
+        <ul id="userTimeline"></ul>
+    </div>
+
+    %{--<div>--}%
+        %{--<h3>Set new words</h3>--}%
+        %{--<p> New Words: <input type="text" id="newWords"></p>--}%
+        %{--<button id="setWords">Update Words</button>--}%
+        %{--<h3>newWords</h3>--}%
+        %{--<ul id="listWords"></ul>--}%
+    %{--</div>--}%
 
 
     <content tag="end">

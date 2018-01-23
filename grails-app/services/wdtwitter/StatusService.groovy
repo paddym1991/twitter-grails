@@ -73,5 +73,34 @@ class StatusService {
         loggedInUser().username = username
     }
 
+    def getAllTweets() {
+
+        def messages = Status.createCriteria().list() {
+            projections {
+                property('message')
+            }
+        }
+
+        Status.findAll().message
+       // return 'hello'
+    }
+
+    /**
+     * Return logged in user's tweets from db
+     */
+    def getUserTweets() {
+
+        def user = loggedInUser()
+        def messages = Status.createCriteria().list() {
+            eq('author', user)
+            projections {
+                property('message')
+            }
+        }
+
+
+
+       // Status.findAll("from Status as s where s.author=:author", [author: loggedInUser()]).message
+    }
 
 }

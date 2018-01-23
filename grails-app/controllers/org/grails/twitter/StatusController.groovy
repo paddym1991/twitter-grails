@@ -27,14 +27,14 @@ class StatusController {
         render statusService.updateStatus(params.newStatus)
     }
 
-    @Secured('IS_AUTHENTICATED_FULLY')
-    def updateWords() {
-        render statusService.updateWords(params.newWordsObject)
-    }
+//    @Secured('IS_AUTHENTICATED_FULLY')
+//    def updateWords() {
+//        render statusService.updateWords(params.newWordsObject)
+//    }
 
     @Secured('IS_AUTHENTICATED_FULLY')
     def loggedInUser() {
-        render(statusService.loggedInUser())
+        render(statusService.loggedInUser() as JSON)
     }
 
 //    @Secured('IS_AUTHENTICATED_FULLY')
@@ -42,7 +42,24 @@ class StatusController {
 //        render(statusService.loggedInUserName())
 //    }
 
+    /**
+     * controller method for updating username
+     * @return
+     */
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def updateUsername() {
+        render(statusService.setUsername(params.username))
+    }
 
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def allTweetsTimeline() {
+        render(statusService.getAllTweets() as JSON)
+    }
+
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def userTimeline() {
+        render(statusService.getUserTweets() as JSON)
+    }
 
 
 
