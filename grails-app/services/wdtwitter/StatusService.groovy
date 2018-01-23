@@ -2,6 +2,7 @@ package wdtwitter
 
 import grails.converters.JSON
 import grails.transaction.Transactional
+import org.grails.twitter.Status
 import org.grails.twitter.auth.Person
 import org.springframework.security.access.annotation.Secured
 import org.springframework.security.core.userdetails.User
@@ -32,12 +33,16 @@ class StatusService {
      */
     //method takes in parameter newStatus json object from status.js ajax function and returns it.
     def updateStatus(newStatus) {
+        def status = new Status(message: newStatus)
+        status.author = loggedInUser()
+        status.save()
+
         newStatus
     }
 
-    def updateWords(newWordsObject) {
-        newWordsObject
-    }
+//    def updateWords(newWordsObject) {
+//        newWordsObject
+//    }
 
     /*
      * Get the logged In User
@@ -67,5 +72,6 @@ class StatusService {
 
         loggedInUser().username = username
     }
+
 
 }
