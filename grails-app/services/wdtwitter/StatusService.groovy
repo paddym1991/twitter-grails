@@ -78,16 +78,13 @@ class StatusService {
      */
     def getAllTweets() {
 
-        //create a list that the extracted data from db will be put in to
+        //create a list that the extracted data from db will be put in to   -   http://docs.grails.org/3.1.1/ref/Domain%20Classes/createCriteria.html
         def messages = Status.createCriteria().list() {
             projections {
                 //return back any message in db to the list
                 property('message')
             }
         }
-
-        //Status.findAll().message
-       // return 'hello'
     }
 
     /**
@@ -105,10 +102,26 @@ class StatusService {
                 property('message')
             }
         }
-
-
-
-       // Status.findAll("from Status as s where s.author=:author", [author: loggedInUser()]).message
     }
+
+    /**
+     * Get all users names from the db
+     */
+    def getAllUsers() {
+        //declare a variable users and assign all users to it
+        def users = Person.getAll()
+        //return all users real names
+        users.realName
+
+//        //create a list that the extracted data from db will be put in to   -   http://docs.grails.org/3.1.1/ref/Domain%20Classes/createCriteria.html
+//        def users = Status.createCriteria().list() {
+//            projections {
+//                //return back any users name in db to the list
+//                property('realName')
+//            }
+//        }
+    }
+
+    
 
 }

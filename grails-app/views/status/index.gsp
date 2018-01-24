@@ -51,6 +51,13 @@
         <ul id="userTimeline"></ul>
     </div>
 
+    <br/><br/><br/>
+
+    <div>
+        <h2>Users</h2>
+        <ul id="usersList"></ul>
+    </div>
+
     %{--<div>--}%
         %{--<h3>Set new words</h3>--}%
         %{--<p> New Words: <input type="text" id="newWords"></p>--}%

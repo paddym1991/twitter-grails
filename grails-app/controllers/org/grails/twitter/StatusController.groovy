@@ -69,6 +69,17 @@ class StatusController {
         render(statusService.getUserTweets() as JSON)
     }
 
+    /**
+     * Calling method to return all users real names as a JSON object
+     * @return JSON object of all users real names
+     */
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def usersList() {
+        render(statusService.getAllUsers() as JSON)
+    }
+
+    
+
 
 
 
