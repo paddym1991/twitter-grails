@@ -24,7 +24,7 @@ class StatusController {
     @Secured('IS_AUTHENTICATED_FULLY')
     def updateStatus() {
         //rendering the update status method and passing the params (newStatus json object) into the call for updateStatus
-        render statusService.updateStatus(params.newStatus)
+        render(statusService.updateStatus(params.newStatus) as JSON)
     }
 
 //    @Secured('IS_AUTHENTICATED_FULLY')

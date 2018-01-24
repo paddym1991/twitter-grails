@@ -31,13 +31,13 @@ class StatusService {
      * @param newStatus
      * @return
      */
-    //method takes in parameter newStatus json object from status.js ajax function and returns it.
+    //method takes in parameter newStatus json object from status.js ajax function and returns it as a map with status message, id and date created.
     def updateStatus(newStatus) {
         def status = new Status(message: newStatus)
         status.author = loggedInUser()
         status.save()
-
-        newStatus
+        //map returned containing status message, status id and status timestamp
+        [status: newStatus, id: status.id, timestamp: status.dateCreated]
     }
 
 //    def updateWords(newWordsObject) {
@@ -98,9 +98,16 @@ class StatusService {
             //set the search field for messages as the author (logged in user)
             eq('author', user)
             projections {
-                //return back any message, with user as the author, to the list
+                //return back any id, message, and dateCreated that link to the the author, to the list
+                property('id')
                 property('message')
+                property('dateCreated')
             }
+            //iterate through each row and collect the 3 pieces of data as above
+            //A map will be created, with the 3 attributes above, for each row the author is in
+            //Ensure that the keys are in the map in the same order as the returned properties above
+        }.collect {
+            [id: it[0], status:it[1], timestamp: it[2]]
         }
     }
 

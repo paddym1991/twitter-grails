@@ -70,8 +70,9 @@ function getUserTimeline() {
         success: function(returnedData) {
             //iterate through the returned data (i.e. the user's messages as a JSON object) -   http://api.jquery.com/jquery.each/
             $.each(returnedData, function(index, value) {
-                //append each message onto the userTimeline list with a delete button beside each
-                $('#userTimeline').append('<p>' + value + ' <button id="deleteTweet">Delete</button>' + '</p>')
+                // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
+                $('#userTimeline').append('<p>' + value.status + ' : ' + value.timestamp + '<button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
+               // $('#userTimeline').attr('id', value)
             })
         }
     })
@@ -88,7 +89,7 @@ function getUsers() {
         success: function(returnedData) {
             // iterate through the returned JSON object of real names
             $.each(returnedData, function(index, value) {
-                //append each users' real name to the users list
+                //append each users' real name to the users list and make it a link
                 $('#usersList').append('<p>' + '<a href="#">' + value + '</a>' + '</p>')
             })
         }
@@ -115,11 +116,10 @@ $(document).on('click', "#submit", function()  {
         //below is a seperate function from above
         success: function(returnedData) {
             //code to update the UI using jQuery library
-            // $statuses.append('<li>message: ' + status.message)
             console.log('Message: ' + returnedData)    //returnedData is the data json object from the ajax function above
             $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
-           // $('#userTimeline').append('<p>' + returnedData + '</p>')
-            $('#userTimeline').append('<p>' + returnedData + ' <button id="deleteTweet">Delete</button>' + '</p>')
+           // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
+            $('#userTimeline').append('<p>' + returnedData.status + ' : ' + returnedData.timestamp + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnData.id+'">Delete</button>' + '</p>')
             $('#allTweetsTimeline').append('<p>' + returnedData + '</p>')
         }
     })
