@@ -82,8 +82,12 @@ class StatusService {
         def messages = Status.createCriteria().list() {
             projections {
                 //return back any message in db to the list
+                property('id')
                 property('message')
+                property('dateCreated')
             }
+        }.collect {
+            [id: it[0], status: it[1], timestamp: it[2]]
         }
     }
 
@@ -129,6 +133,9 @@ class StatusService {
 //        }
     }
 
-    
+    def deleteTweet(id) {
+        def status = Status.get(id)
+        status.delete()
+    }
 
 }

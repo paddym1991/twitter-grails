@@ -53,7 +53,7 @@ function getTimeline() {
             //iterate through the returned data (i.e. the messages as a JSON object)
             $.each(returnedData, function(index, value) {
                 //append each message onto the allTweetsTimeline list
-                $('#allTweetsTimeline').append('<p>' + value + '</p>')
+                $('#allTweetsTimeline').append('<p>' + value.timestamp + ' : ' + value.status + '</p>')
             })
         }
     })
@@ -71,7 +71,7 @@ function getUserTimeline() {
             //iterate through the returned data (i.e. the user's messages as a JSON object) -   http://api.jquery.com/jquery.each/
             $.each(returnedData, function(index, value) {
                 // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-                $('#userTimeline').append('<p>' + value.status + ' : ' + value.timestamp + '<button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
+                $('#userTimeline').append('<p>' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
                // $('#userTimeline').attr('id', value)
             })
         }
@@ -119,8 +119,8 @@ $(document).on('click', "#submit", function()  {
             console.log('Message: ' + returnedData)    //returnedData is the data json object from the ajax function above
             $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
            // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-            $('#userTimeline').append('<p>' + returnedData.status + ' : ' + returnedData.timestamp + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnData.id+'">Delete</button>' + '</p>')
-            $('#allTweetsTimeline').append('<p>' + returnedData + '</p>')
+            $('#userTimeline').append('<p>' + returnedData.status + ' : ' + returnedData.timestamp + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnedData.id+'">Delete</button>' + '</p>')
+            $('#allTweetsTimeline').append('<p>' + returnedData.status + ' : ' + returnedData.timestamp + '</p>')
         }
     })
 })
@@ -141,7 +141,22 @@ $(document).on('click', "#update", function()  {
     })
 })
 
+/**
+ * AJAX function to delete a tweet
+ */
+$(document).on('click', "#deleteTweet", function()  {
 
+   // var name = $('#newUsername').val()
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/deleteTweet',
+        type: 'POST',
+        //data: {username:name},
+        success: function(response) {
+            console.log(response)
+
+        }
+    })
+})
 
 // /**
 //  * JQuery function for adding new words message when button is clicked
