@@ -78,7 +78,10 @@ class StatusController {
         render(statusService.getAllUsers() as JSON)
     }
 
-    
+    @Secured('IS_AUTHENTICATED_FULLY')
+    def deleteTweet() {
+        render(statusService.deleteTweet(params.tweet_id))
+    }
 
 
 

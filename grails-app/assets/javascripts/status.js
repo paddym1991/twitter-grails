@@ -71,7 +71,7 @@ function getUserTimeline() {
             //iterate through the returned data (i.e. the user's messages as a JSON object) -   http://api.jquery.com/jquery.each/
             $.each(returnedData, function(index, value) {
                 // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-                $('#userTimeline').append('<p>' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
+                $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" >' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
                // $('#userTimeline').attr('id', value)
             })
         }
@@ -119,8 +119,8 @@ $(document).on('click', "#submit", function()  {
             console.log('Message: ' + returnedData)    //returnedData is the data json object from the ajax function above
             $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
            // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-            $('#userTimeline').append('<p>' + returnedData.status + ' : ' + returnedData.timestamp + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnedData.id+'">Delete</button>' + '</p>')
-            $('#allTweetsTimeline').append('<p>' + returnedData.status + ' : ' + returnedData.timestamp + '</p>')
+            $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" >' + returnedData.timestamp + ' : ' + returnedData.status + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnedData.id+'">Delete</button>' + '</p>')
+            $('#allTweetsTimeline').append('<p id="tweetid' + returnedData.id + '" >' + returnedData.timestamp + ' : ' + returnedData.status + '</p>')
         }
     })
 })
@@ -144,16 +144,32 @@ $(document).on('click', "#update", function()  {
 /**
  * AJAX function to delete a tweet
  */
-$(document).on('click', "#deleteTweet", function()  {
+// "button" refers to the button TAG    https://stackoverflow.com/questions/18680735/how-to-get-the-id-of-the-element-clicked-using-jquery  - first answer
+// in a list of button the tag linked to the button chosen is selected and the related button id is chosen
+$(document).on('click', "button", function()  {
 
-   // var name = $('#newUsername').val()
+    //get the id of the button within the button tag that was clicked
+    var buttonId = $(this).attr('id')
+
+    //log this id to the console
+    console.log(buttonId)
+    //print an alert to screen of the button id
+    alert('button id = ' + buttonId)
+    //get the id of the tweet within the button tag that has been clicked
+    var tweetId = $(this).attr('tweetId')
+    //log tweet id to console
+    console.log(tweetId)
+    // var pId = $(this).attr('id')
+    // console.log(pId)
+    //print an alert to screen of tweet id
+    alert('tweet id = ' + tweetId)
     $.ajax({
         url: 'http://localhost:8080/wdtwitter/status/deleteTweet',
         type: 'POST',
-        //data: {username:name},
+        data: {tweet_id:tweetId},
         success: function(response) {
             console.log(response)
-
+            $('#UserTimeline').remove('#tweetid' + tweetId)
         }
     })
 })

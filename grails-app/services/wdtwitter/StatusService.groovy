@@ -133,8 +133,8 @@ class StatusService {
 //        }
     }
 
-    def deleteTweet(id) {
-        def status = Status.get(id)
+    def deleteTweet(tweet_id) {
+        def status = Status.get(tweet_id)
         status.delete()
     }
 
