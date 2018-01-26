@@ -71,7 +71,7 @@ function getUserTimeline() {
             //iterate through the returned data (i.e. the user's messages as a JSON object) -   http://api.jquery.com/jquery.each/
             $.each(returnedData, function(index, value) {
                 // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-                $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" >' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
+                $('#userTimeline').append('<p id="tweetid' + value.id + '" >' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
                // $('#userTimeline').attr('id', value)
             })
         }
