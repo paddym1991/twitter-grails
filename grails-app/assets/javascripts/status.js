@@ -53,7 +53,7 @@ function getTimeline() {
             //iterate through the returned data (i.e. the messages as a JSON object)
             $.each(returnedData, function(index, value) {
                 //append each message onto the allTweetsTimeline list
-                $('#allTweetsTimeline').append('<p>' + value.timestamp + ' : ' + value.status + '</p>')
+                $('#allTweetsTimeline').append('<p>' + value.author + ': ' + value.timestamp + ' : ' + value.status + '</p>')
             })
         }
     })
@@ -71,7 +71,7 @@ function getUserTimeline() {
             //iterate through the returned data (i.e. the user's messages as a JSON object) -   http://api.jquery.com/jquery.each/
             $.each(returnedData, function(index, value) {
                 // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-                $('#userTimeline').append('<p id="tweetid' + value.id + '" >' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
+                $('#userTimeline').append('<p id="tweetid' + value.id + '" >' + value.author + ': ' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
                // $('#userTimeline').attr('id', value)
             })
         }
@@ -90,11 +90,26 @@ function getUsers() {
             // iterate through the returned JSON object of real names
             $.each(returnedData, function(index, value) {
                 //append each users' real name to the users list and make it a link
-                $('#usersList').append('<p>' + '<a href="#">' + value + '</a>' + '</p>')
+                $('#usersList').append('<p id="showUser' + value + '">' + '<a href="#">' + value + '</a>' + '</p>')
+                $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
+                //$('#usersList').append('<p>' + '<a href="${createLink(controller: ' + ${person} + ', action: ' + ${list} + ')}">' + value + '</a>' + '</p>')
             })
         }
     })
 }
+
+$(document).on('click', "#showUserJeff Brown", function()  {
+    console.log('Hi)')
+    var name = $('#newUsername').val()
+    $.ajax({
+        url: 'http://localhost:8080/wdtwitter/status/show',
+        type: 'POST',
+        data: {username:name},
+        success: function(returnedData) {
+            console.log(returnedData)
+        }
+    })
+})
 
 
 
@@ -119,7 +134,7 @@ $(document).on('click', "#submit", function()  {
             console.log('Message: ' + returnedData)    //returnedData is the data json object from the ajax function above
             $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
            // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-            $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" >' + returnedData.timestamp + ' : ' + returnedData.status + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnedData.id+'">Delete</button>' + '</p>')
+            $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" >' + returnedData.author + ': ' + returnedData.timestamp + ' : ' + returnedData.status + ' <button id="deleteTweet' + returnedData.id + ' " tweetId="'+returnedData.id+'">Delete</button>' + '</p>')
             $('#allTweetsTimeline').append('<p id="tweetid' + returnedData.id + '" >' + returnedData.timestamp + ' : ' + returnedData.status + '</p>')
         }
     })
@@ -159,17 +174,19 @@ $(document).on('click', "button", function()  {
     var tweetId = $(this).attr('tweetId')
     //log tweet id to console
     console.log(tweetId)
-    // var pId = $(this).attr('id')
-    // console.log(pId)
-    //print an alert to screen of tweet id
     alert('tweet id = ' + tweetId)
+    //var pId = "tweetid" + tweetId
+   //console.log(pId)
+   //  var pId = $(this).attr('id')
+   //  console.log(pId)
+    //print an alert to screen of tweet id
     $.ajax({
         url: 'http://localhost:8080/wdtwitter/status/deleteTweet',
         type: 'POST',
         data: {tweet_id:tweetId},
         success: function(response) {
             console.log(response)
-            $('#UserTimeline').remove('#tweetid' + tweetId)
+            $('#UserTimeline').remove('<p id="pId"></p>')
         }
     })
 })

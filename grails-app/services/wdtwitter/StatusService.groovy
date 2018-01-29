@@ -37,7 +37,7 @@ class StatusService {
         status.author = loggedInUser()
         status.save()
         //map returned containing status message, status id and status timestamp
-        [status: newStatus, id: status.id, timestamp: status.dateCreated]
+        [status: newStatus, id: status.id, timestamp: status.dateCreated, author:status.author.realName]
     }
 
 //    def updateWords(newWordsObject) {
@@ -85,9 +85,10 @@ class StatusService {
                 property('id')
                 property('message')
                 property('dateCreated')
+                property('author')
             }
         }.collect {
-            [id: it[0], status: it[1], timestamp: it[2]]
+            [id: it[0], status: it[1], timestamp: it[2], author: it[3].realName]
         }
     }
 
@@ -106,12 +107,13 @@ class StatusService {
                 property('id')
                 property('message')
                 property('dateCreated')
+                property('author')
             }
             //iterate through each row and collect the 3 pieces of data as above
             //A map will be created, with the 3 attributes above, for each row the author is in
             //Ensure that the keys are in the map in the same order as the returned properties above
         }.collect {
-            [id: it[0], status:it[1], timestamp: it[2]]
+            [id: it[0], status:it[1], timestamp: it[2], author: it[3].realName]
         }
     }
 
