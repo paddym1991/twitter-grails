@@ -37,6 +37,7 @@ function getUser() {
         //below is a seperate function from above
         success: function(returnedData) {
            $('#currentUserName').html(returnedData.username)
+           $('#currentUsersName').html(returnedData.realName)
         }
     })
 }
