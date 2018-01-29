@@ -110,7 +110,7 @@ class StatusService {
                 property('author')
             }
             //iterate through each row and collect the 3 pieces of data as above
-            //A map will be created, with the 3 attributes above, for each row the author is in
+            //A map will be created, with the 4 attributes above, for each row the author is in
             //Ensure that the keys are in the map in the same order as the returned properties above
         }.collect {
             [id: it[0], status:it[1], timestamp: it[2], author: it[3].realName]
@@ -123,8 +123,8 @@ class StatusService {
     def getAllUsers() {
         //declare a variable users and assign all users to it
         def users = Person.getAll()
-        //return all users real names
-        users.realName
+        //return all users
+        users
 
 //        //create a list that the extracted data from db will be put in to   -   http://docs.grails.org/3.1.1/ref/Domain%20Classes/createCriteria.html
 //        def users = Status.createCriteria().list() {

@@ -92,11 +92,12 @@ function getUsers() {
         url: 'http://localhost:8080/wdtwitter/status/usersList',
         type: 'GET', //HTML method "post" or "get"
         //below is a seperate function from above
+        //returnedData will be a list of user objects
         success: function(returnedData) {
-            // iterate through the returned JSON object of real names
+            // iterate through the returned JSON objects of users
             $.each(returnedData, function(index, value) {
-                //append each users' real name to the users list and make it a link
-                $('#usersList').append('<p id="showUser' + value + '">' + '<a href="#">' + value + '</a>' + '</p>')
+                //append each users' id and real name to the users list and make it a link
+                $('#usersList').append('<p id="showUser' + value.id  + '">' + '<a href="#">' + value.realName + '</a>' + '</p>')
                 $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
                 //$('#usersList').append('<p>' + '<a href="${createLink(controller: ' + ${person} + ', action: ' + ${list} + ')}">' + value + '</a>' + '</p>')
             })
@@ -104,9 +105,10 @@ function getUsers() {
     })
 }
 
-$(document).on('click', "#showUserJeff Brown", function()  {
-    console.log('Hi)')
-    var name = $('#newUsername').val()
+$(document).on('click', "#showUser1", function()  {
+    console.log('Hi')
+    alert('hi')
+   // var name = $('#newUsername').val()
     $.ajax({
         url: 'http://localhost:8080/wdtwitter/status/show',
         type: 'POST',
