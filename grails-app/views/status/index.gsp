@@ -39,17 +39,12 @@
                 <h2>What are you doing?</h2>
                 <p>message: <input type="text" id="message"></p>
                 <button id="submit">Update Status</button><br/><br/>
-
-                <div>
-                    <h2>Timeline</h2>
-                    <ul id="timeline"></ul>
-                </div>
             </div>
 
             %{--<br/><br/><br/>--}%
 
             <div class="col-lg-4">
-                <h2>All users status Timeline</h2>
+                <h2>All users Timeline</h2>
                 <ul id="allTweetsTimeline"></ul>
             </div>
 

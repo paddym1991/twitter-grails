@@ -28,7 +28,7 @@ $(function() {
 })
 
 /**
- * function called when index page is requested. This requests the logged in user JSON object and returns the username
+ * function called when index page is requested. This requests the logged in user JSON object and returns user attributes
  */
 function getUser() {
     $.ajax({
@@ -99,7 +99,8 @@ function getUsers() {
             // iterate through the returned JSON objects of users
             $.each(returnedData, function(index, value) {
                 //append each users' id and real name to the users list and make it a link
-                $('#usersList').append('<p id="showUser' + value.id  + '">' + '<a href="/showuser/$(users.id">' + value.realName + '</a>' + '</p>')
+                                    //assign a class to the <p> tag and userId to make it generic
+                $('#usersList').append('<p class="showUser" userId="' + value.id  + '">' + '<a href="#">' + value.realName + '</a>' + '</p>')
                // $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
                 //$('#usersList').append('<p>' + '<a href="${createLink(controller: ' + ${person} + ', action: ' + ${list} + ')}">' + value + '</a>' + '</p>')
             })
@@ -107,14 +108,17 @@ function getUsers() {
     })
 }
 
-$(document).on('click', "#showUser1", function()  {
+                        //showUser class button
+$(document).on('click', ".showUser", function()  {
+    //get the id ('userId') from the showUser class ('this'). This id will be the same id as the user
+    var id = $(this).attr('userId')
     console.log('Hi')
     alert('hi')
    // var name = $('#newUsername').val()
     $.ajax({
-        url: 'http://localhost:8080/wdtwitter/status/show',
+        url: 'http://localhost:8080/wdtwitter/person/shownUser',
         type: 'POST',
-        data: {username:name},
+        data: {id:id},
         success: function(returnedData) {
             console.log(returnedData)
         }
@@ -142,7 +146,7 @@ $(document).on('click', "#submit", function()  {
         success: function(returnedData) {
             //code to update the UI using jQuery library
             console.log('Message: ' + returnedData)    //returnedData is the data json object from the ajax function above
-            $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
+           // $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
            // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
             $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" > <span><h4>' + returnedData.author + ' wrote : </h4></span><br>'
                 + '<span>' +  returnedData.status + '</span><br>' + 'on ' + returnedData.timestamp + ' <button id="deleteTweet'
