@@ -10,6 +10,7 @@ class Person {
 	String username
 	String password
 	String phone
+	String email
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked

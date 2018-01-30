@@ -38,6 +38,8 @@ function getUser() {
         success: function(returnedData) {
            $('#currentUserName').html(returnedData.username)
            $('#currentUsersName').html(returnedData.realName)
+           $('#currentUserEmail').html(returnedData.email)
+           $('#currentUserPhone').html(returnedData.phone)
         }
     })
 }
@@ -97,8 +99,8 @@ function getUsers() {
             // iterate through the returned JSON objects of users
             $.each(returnedData, function(index, value) {
                 //append each users' id and real name to the users list and make it a link
-                $('#usersList').append('<p id="showUser' + value.id  + '">' + '<a href="#">' + value.realName + '</a>' + '</p>')
-                $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
+                $('#usersList').append('<p id="showUser' + value.id  + '">' + '<a href="/showuser/$(users.id">' + value.realName + '</a>' + '</p>')
+               // $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
                 //$('#usersList').append('<p>' + '<a href="${createLink(controller: ' + ${person} + ', action: ' + ${list} + ')}">' + value + '</a>' + '</p>')
             })
         }
