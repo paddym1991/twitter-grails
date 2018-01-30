@@ -23,7 +23,7 @@
 
 <div class="row">
     <div class="col-lg-4">
-        <h2><span id="currentUsersName"></span>'s Timeline</h2>
+        <h2>Timeline</h2>
         <ul id="userTimeline"></ul>
     </div>
 </div>
