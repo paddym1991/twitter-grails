@@ -99,8 +99,8 @@ function getUsers() {
             // iterate through the returned JSON objects of users
             $.each(returnedData, function(index, value) {
                 //append each users' id and real name to the users list and make it a link
-                                    //assign a class to the <p> tag and userId to make it generic
-                $('#usersList').append('<p class="showUser" userId="' + value.id  + '">' + '<a href="#">' + value.realName + '</a>' + '</p>')
+                //assign id to the <p> tag. Create a href link and give it the route of the controller (plus users id) that will render the new page
+                $('#usersList').append('<p class="showUser" userId="' + value.id  + '">' + '<a href="http://localhost:8080/wdtwitter/person/shownUser/' + value.id + '">' + value.realName + '</a>' + '</p>')
                // $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
                 //$('#usersList').append('<p>' + '<a href="${createLink(controller: ' + ${person} + ', action: ' + ${list} + ')}">' + value + '</a>' + '</p>')
             })
@@ -108,7 +108,10 @@ function getUsers() {
     })
 }
 
-                        //showUser class button
+/**
+ * function to return the user object of the specific user that was chosen.
+ */
+                        //showUser class button (".className" is for class button parameter & "#id" is for id button parameter)
 $(document).on('click', ".showUser", function()  {
     //get the id ('userId') from the showUser class ('this'). This id will be the same id as the user
     var id = $(this).attr('userId')
@@ -121,6 +124,11 @@ $(document).on('click', ".showUser", function()  {
         data: {id:id},
         success: function(returnedData) {
             console.log(returnedData)
+            console.log(returnedData.username)
+            $('#otherUserName').html(returnedData.username)
+            $('#otherUsersName').html(returnedData.realName)
+            $('#otherUserEmail').html(returnedData.email)
+            $('#otherUserPhone').html(returnedData.phone)
         }
     })
 })
