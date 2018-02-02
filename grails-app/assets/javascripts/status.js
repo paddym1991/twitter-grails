@@ -11,14 +11,9 @@
 // })
 
 
-var $statuses = $('statuses')
-var $message = $('message')
-
-
 //added function to check if id 'submit' is being passed
 $(function() {
 
-    console.log($("#submit").html())
     getUser()
     getUsers()
     getTimeline()
@@ -79,8 +74,7 @@ function getUserTimeline() {
                // $('#userTimeline').append('<p id="tweetid' + value.id + '" >' + value.author + ': ' + value.timestamp + ' : ' + value.status + ' <button id="deleteTweet' + value.id + '" tweetId="'+ value.id +'">Delete</button>' + '</p>')
                // $('#userTimeline').attr('id', value)
                 $('#userTimeline').append('<p id="tweetid' + value.id + '" > <span><h4>' + value.author + ' wrote : </h4></span><br>'
-                    + '<span>' +  value.status + '</span><br>' + 'on ' + value.timestamp + ' <button id="deleteTweet'
-                    + value.id + ' " tweetId="' + value.id+'">Delete</button>' + '</p><br>')
+                    + '<span>' +  value.status + '</span><br>' + 'on ' + value.timestamp + ' <button class="deleteTweet" deleteTweetId="' + value.id+'">Delete</button>' + '</p><br>')
             })
         }
     })
@@ -100,7 +94,7 @@ function getUsers() {
             $.each(returnedData, function(index, value) {
                 //append each users' id and real name to the users list and make it a link
                 //assign id to the <p> tag. Create a href link and give it the route of the controller (plus users id) that will render the new page
-                $('#usersList').append('<p class="showUser" userId="' + value.id  + '">' + '<a href="http://localhost:8080/wdtwitter/person/shownUser/' + value.id + '">' + value.realName + '</a>' + '</p>')
+                $('#usersList').append('<p userId="' + value.id  + '">' + '<a href="http://localhost:8080/wdtwitter/person/shownUser/' + value.id + '">' + value.realName + '</a>' + '</p>')
                // $('#usersList').append('<p id="showUser">' + '<a href="#">' + value + '</a>' + '</p>')
                 //$('#usersList').append('<p>' + '<a href="${createLink(controller: ' + ${person} + ', action: ' + ${list} + ')}">' + value + '</a>' + '</p>')
             })
@@ -108,30 +102,30 @@ function getUsers() {
     })
 }
 
-/**
- * function to return the user object of the specific user that was chosen.
- */
-                        //showUser class button (".className" is for class button parameter & "#id" is for id button parameter)
-$(document).on('click', ".showUser", function()  {
-    //get the id ('userId') from the showUser class ('this'). This id will be the same id as the user
-    var id = $(this).attr('userId')
-    console.log('Hi')
-    alert('hi')
-   // var name = $('#newUsername').val()
-    $.ajax({
-        url: 'http://localhost:8080/wdtwitter/person/shownUser',
-        type: 'POST',
-        data: {id:id},
-        success: function(returnedData) {
-            console.log(returnedData)
-            console.log(returnedData.username)
-            $('#otherUserName').html(returnedData.username)
-            $('#otherUsersName').html(returnedData.realName)
-            $('#otherUserEmail').html(returnedData.email)
-            $('#otherUserPhone').html(returnedData.phone)
-        }
-    })
-})
+// /**
+//  * function to return the user object of the specific user that was chosen.
+//  */
+//                         //showUser class button (".className" is for class button parameter & "#id" is for id button parameter)
+// $(document).on('click', ".showUser", function()  {
+//     //get the id ('userId') from the showUser class ('this'). This id will be the same id as the user
+//     var id = $(this).attr('userId')
+//     console.log('Hi')
+//     alert('hi')
+//    // var name = $('#newUsername').val()
+//     $.ajax({
+//         url: 'http://localhost:8080/wdtwitter/person/shownUser',
+//         type: 'POST',
+//         data: {id:id},
+//         success: function(returnedData) {
+//             console.log(returnedData)
+//             console.log(returnedData.username)
+//             $('#otherUserName').html(returnedData.username)
+//             $('#otherUsersName').html(returnedData.realName)
+//             $('#otherUserEmail').html(returnedData.email)
+//             $('#otherUserPhone').html(returnedData.phone)
+//         }
+//     })
+// })
 
 
 
@@ -156,9 +150,8 @@ $(document).on('click', "#submit", function()  {
             console.log('Message: ' + returnedData)    //returnedData is the data json object from the ajax function above
            // $('#timeline').append('<p>' + returnedData + '</p>')    //appending the returnedData as a 'html line of code' onto the timeline list (using timeline id) in the gsp file
            // append the status and timestamp to the list. Also append a button with an individual id and the tweet's id
-            $('#userTimeline').append('<p id="tweetid' + returnedData.id + '" > <span><h4>' + returnedData.author + ' wrote : </h4></span><br>'
-                + '<span>' +  returnedData.status + '</span><br>' + 'on ' + returnedData.timestamp + ' <button id="deleteTweet'
-                + returnedData.id + ' " tweetId="' + returnedData.id+'">Delete</button>' + '</p><br>')
+            $('#userTimeline').append('<p class="tweetInList" id="tweetid' + returnedData.id + '" > <span><h4>' + returnedData.author + ' wrote : </h4></span><br>'
+                + '<span>' +  returnedData.status + '</span><br>' + 'on ' + returnedData.timestamp + ' <button class="deleteTweet" deleteTweetId="' + returnedData.id+'">Delete</button>' + '</p><br>')
             $('#allTweetsTimeline').append('<p id="tweetid' + returnedData.id + '" > <span><h4>' + returnedData.author + ' wrote : </h4></span><br>'
                 + '<span>' + returnedData.status + '</span><br>' + 'on ' + returnedData.timestamp + '</p><br>')
         }
@@ -185,18 +178,11 @@ $(document).on('click', "#update", function()  {
  * AJAX function to delete a tweet
  */
 // "button" refers to the button TAG    https://stackoverflow.com/questions/18680735/how-to-get-the-id-of-the-element-clicked-using-jquery  - first answer
-// in a list of button the tag linked to the button chosen is selected and the related button id is chosen
-$(document).on('click', "button", function()  {
+// using the class of the delete button as the parameter for on click
+$(document).on('click', ".deleteTweet", function()  {
 
-    //get the id of the button within the button tag that was clicked
-    var buttonId = $(this).attr('id')
-
-    //log this id to the console
-    console.log(buttonId)
-    //print an alert to screen of the button id
-    alert('button id = ' + buttonId)
     //get the id of the tweet within the button tag that has been clicked
-    var tweetId = $(this).attr('tweetId')
+    var tweetId = $(this).attr('deleteTweetId')
     //log tweet id to console
     console.log(tweetId)
     alert('tweet id = ' + tweetId)
@@ -211,7 +197,7 @@ $(document).on('click', "button", function()  {
         data: {tweet_id:tweetId},
         success: function(response) {
             console.log(response)
-            $('#UserTimeline').remove('<p id="pId"></p>')
+            $('#UserTimeline').remove('.tweetInList')
         }
     })
 })
